@@ -35,6 +35,28 @@ describe('Countdown', () => {
       }, 3001)
     });
 
+    it('should have static count number when paused', () =>{
+      var countdown = TestUtils.renderIntoDocument(<Countdown/>);
+      countdown.handleSetCountdown(10);
+      countdown.handleChangeState('paused');
+
+      setTimeout(() => {
+        expect(countdown.state.count).toBe(10);
+        expect(countdown.state.countdownStatus).toBe('paused');
+      },1001)
+    });
+
+    it('should set the count value to 0 when stopped', () =>{
+      var countdown = TestUtils.renderIntoDocument(<Countdown/>);
+      countdown.handleSetCountdown(10);
+      countdown.handleChangeState('stopped');
+
+      setTimeout(() => {
+        expect(countdown.state.count).toBe(0);
+        expect(countdown.state.countdownStatus).toBe('stopped');
+      },1001)
+    });
+
   });
 
 })
